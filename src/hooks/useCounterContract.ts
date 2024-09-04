@@ -61,7 +61,7 @@ export function useCounterContract() {
       setVal(null);
       const val = await counterContract.getCounter();
       setVal(val.toString());
-      await sleep(5000); // sleep 5 seconds and poll value again
+      await sleep(4*5000); // sleep 5 seconds and poll value again
       getValue();
     }
     getValue();
@@ -71,8 +71,8 @@ export function useCounterContract() {
     value: val,
     address: counterContract?.address.toString(),
     sendIncrement: () => {
-      console.log(counterContract?.address.toString())
-      console.log(counterContract)
+      console.log(sender)
+      console.log(sender.address?.toString())
       return counterContract?.sendIncrement(sender);
     },
   };

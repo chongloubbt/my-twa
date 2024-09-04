@@ -7,17 +7,14 @@ export function useTonConnect(): { sender: Sender; connected: boolean } {
   return {
     sender: {
       send: async (args: SenderArguments) => {
+        console.log(tonConnectUI.account?.address.toString());
         console.log(tonConnectUI);
-        console.log(args)
-        console.log(args.to.toString())
-        console.log(args.value.toString())
-        console.log(args.body?.toBoc().toString('base64'))
+        console.log(args.to.toString());
         tonConnectUI.sendTransaction({
           messages: [
             {
               address: args.to.toString(),
               amount: args.value.toString(),
-              // stateInit: args.body?.toBoc().toString('base64'),
               payload: args.body?.toBoc().toString('base64'),
             },
           ],

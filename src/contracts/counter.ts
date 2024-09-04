@@ -31,6 +31,17 @@ export default class Counter implements Contract {
     });
   }
 
+  async sendIncrementex(provider: ContractProvider, via: Sender) {
+    const messageBody = beginCell()
+      .storeUint(1, 32) // op (op #1 = increment)
+      .storeUint(0, 64) // query id
+      .endCell();
+    await provider.internal(via, {
+      value: "0.02", // send 0.01 TON for gas
+      body: messageBody
+    });
+  }
+
   async getCounter(provider: ContractProvider) {
     const { stack } = await provider.get("counter", []);
     return stack.readBigNumber();
